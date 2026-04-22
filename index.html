@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Proposal for @fitness.with.pots.jess</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg:        #D6E4EF;
+    --ink:       #182230;
+    --hero:      #3A7CA5;
+    --soft:      #BDD0E0;
+    --highlight: #1F5F88;
+    --muted:     #5A7A92;
+    --card-bg:   #EEF4F9;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 17px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── LAYOUT ──────────────────────────────────────── */
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  section { padding: 80px 0; }
+  section + section { border-top: 1px solid var(--soft); }
+
+  /* ─── LABELS ──────────────────────────────────────── */
+  .label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 14px;
+  }
+
+  /* ─── HERO ────────────────────────────────────────── */
+  .hero {
+    padding: 100px 0 80px;
+    border-bottom: 1px solid var(--soft);
+  }
+
+  .hero .label { margin-bottom: 32px; }
+
+  .hero-handle {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(38px, 7vw, 68px);
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 22px;
+  }
+
+  .hero-handle span { color: var(--hero); }
+
+  .hero-tagline {
+    font-size: 18px;
+    color: var(--muted);
+    font-style: italic;
+    max-width: 520px;
+    line-height: 1.6;
+    margin-bottom: 36px;
+  }
+
+  .hero-meta {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: .04em;
+  }
+
+  /* ─── SECTION HEADINGS ────────────────────────────── */
+  .section-num {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--hero);
+    opacity: .7;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 28px;
+    color: var(--ink);
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 10px;
+    letter-spacing: .01em;
+  }
+
+  p { margin-bottom: 18px; color: var(--ink); }
+  p:last-child { margin-bottom: 0; }
+
+  /* ─── I SEE YOU ───────────────────────────────────── */
+  .see-you p { font-size: 18px; line-height: 1.85; }
+
+  .see-you .emphasis {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--hero);
+    display: block;
+    margin: 28px 0;
+    padding-left: 22px;
+    border-left: 2px solid var(--hero);
+    line-height: 1.5;
+  }
+
+  /* ─── OBSERVATIONS ────────────────────────────────── */
+  .obs-grid { display: flex; flex-direction: column; gap: 22px; }
+
+  .obs-card {
+    background: var(--card-bg);
+    border: 1px solid var(--soft);
+    border-radius: 10px;
+    padding: 32px 36px;
+  }
+
+  .obs-number {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--hero);
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .obs-card h3 { font-size: 18px; margin-bottom: 14px; }
+
+  .obs-card p { font-size: 15.5px; color: #3A4A58; }
+
+  .obs-opportunity {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--soft);
+    font-size: 14.5px;
+    color: var(--highlight);
+    font-weight: 500;
+  }
+
+  /* ─── SERVICES ────────────────────────────────────── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+
+  @media (max-width: 600px) {
+    .services-grid { grid-template-columns: 1fr; }
+  }
+
+  .service-card {
+    background: var(--card-bg);
+    border: 1px solid var(--soft);
+    border-radius: 10px;
+    padding: 28px 30px;
+  }
+
+  .service-card h3 { font-size: 15px; margin-bottom: 12px; }
+
+  .service-card ul {
+    list-style: none;
+    font-size: 14px;
+    color: #3A4A58;
+    line-height: 1.7;
+  }
+
+  .service-card ul li {
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 6px;
+  }
+
+  .service-card ul li::before {
+    content: "-";
+    position: absolute;
+    left: 0;
+    color: var(--hero);
+  }
+
+  .price-badge {
+    display: inline-block;
+    margin-top: 18px;
+    background: var(--soft);
+    color: var(--highlight);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 20px;
+    letter-spacing: .02em;
+  }
+
+  /* ─── SAMPLES ─────────────────────────────────────── */
+  .sample-block {
+    background: var(--card-bg);
+    border: 1px solid var(--soft);
+    border-radius: 10px;
+    padding: 36px 40px;
+    margin-bottom: 28px;
+  }
+
+  .sample-block + .sample-block { margin-top: 0; }
+
+  .sample-type {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .sample-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--soft);
+  }
+
+  .caption-body {
+    font-size: 15px;
+    color: #2A3A48;
+    line-height: 2;
+    white-space: pre-line;
+  }
+
+  .carousel-slides { display: flex; flex-direction: column; gap: 0; }
+
+  .slide {
+    padding: 20px 0;
+    border-bottom: 1px dashed var(--soft);
+  }
+
+  .slide:last-child { border-bottom: none; }
+
+  .slide-label {
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .slide-copy {
+    font-size: 15px;
+    color: #2A3A48;
+    line-height: 1.85;
+    white-space: pre-line;
+  }
+
+  .sample-note {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--soft);
+    font-size: 13.5px;
+    color: var(--muted);
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  /* ─── WHY DIFFERENT ───────────────────────────────── */
+  .diff-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .diff-list li {
+    font-size: 16px;
+    line-height: 1.7;
+    padding-left: 24px;
+    position: relative;
+    color: #2A3A48;
+  }
+
+  .diff-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 8px;
+    height: 1px;
+    background: var(--hero);
+  }
+
+  /* ─── CTA ─────────────────────────────────────────── */
+  .cta-section {
+    text-align: center;
+    padding: 90px 0 100px;
+    border-top: 1px solid var(--soft);
+  }
+
+  .cta-section h2 {
+    font-size: clamp(28px, 4.5vw, 42px);
+    margin-bottom: 16px;
+  }
+
+  .cta-section p {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 480px;
+    margin: 0 auto 36px;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--highlight);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 14px 34px;
+    border-radius: 6px;
+    text-decoration: none;
+    letter-spacing: .03em;
+    transition: background .2s;
+  }
+
+  .cta-btn:hover { background: var(--hero); }
+
+  /* ─── FOOTER ──────────────────────────────────────── */
+  footer {
+    padding: 32px 0;
+    border-top: 1px solid var(--soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12.5px;
+    color: var(--muted);
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  footer strong { color: var(--ink); font-weight: 500; }
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===================================== -->
+<section class="hero">
+  <div class="container">
+    <span class="label">SMM Proposal - April 21, 2026</span>
+    <h1 class="hero-handle">
+      For <span>@fitness.with.pots.jess</span>
+    </h1>
+    <p class="hero-tagline">
+      A proposal for the creator who built the fitness resource the industry never made.
+    </p>
+    <!-- STUDENT: thay ten cua em vao day -->
+    <p class="hero-meta">Prepared by Evelyn</p>
+  </div>
+</section>
+
+<!-- ===== I SEE YOU ================================ -->
+<section class="see-you">
+  <div class="container">
+    <span class="section-num">01 / 07</span>
+    <h2>I see what you're actually doing.</h2>
+
+    <p>Most fitness creators are selling aspiration. A body. A before and after. A version of yourself that works harder.</p>
+
+    <p>You're doing something structurally different.</p>
+
+    <p>Every piece of content you post is quietly telling someone: <em>you are not broken for not being able to do what they're doing.</em> The person who finds your account has almost always already been failed - by a doctor who said it's anxiety, by a trainer who said push through it, by fitness content that starts every single workout with "stand with feet shoulder-width apart" as though that's neutral ground.</p>
+
+    <span class="emphasis">Your content is the first time many of them have seen their body explained back to them without judgment.</span>
+
+    <p>That's not just fitness content. That's patient advocacy dressed as fitness content. And that distinction is what makes your account irreplaceable.</p>
+
+    <p>The opportunity right now: the people who need you most can't always find you. Not because your content isn't good - because the discovery layer hasn't been built around the depth you already have.</p>
+  </div>
+</section>
+
+<!-- ===== OBSERVATIONS ============================ -->
+<section>
+  <div class="container">
+    <span class="section-num">02 / 07</span>
+    <h2>3 things I noticed.</h2>
+
+    <div class="obs-grid">
+
+      <div class="obs-card">
+        <span class="obs-number">Observation 01</span>
+        <h3>You are in a near-empty lane.</h3>
+        <p>POTS affects an estimated 1 to 3 million people in the US alone. The r/POTS community on Reddit has over 150,000 members. Dysautonomia International reports diagnostic wait times averaging 4+ years. That's a massive audience that has been medically underserved, dismissed, and left without adapted fitness resources for years.</p>
+        <p>And yet the number of Instagram creators doing what you do - lived-experience POTS fitness, not just awareness content - can be counted on one hand.</p>
+        <p class="obs-opportunity">You are not competing for space. You are establishing the category. The work now is discoverability and format optimization, not differentiation - you already have that.</p>
+      </div>
+
+      <div class="obs-card">
+        <span class="obs-number">Observation 02</span>
+        <h3>The highest-value content format in your niche is underused.</h3>
+        <p>In the chronic illness education space, save rates on educational carousels are dramatically higher than most fitness niches - because the audience is research-literate and saves content to share with doctors, family members, and people they're trying to help understand their condition.</p>
+        <p>A carousel titled "Why your heart rate spikes just from standing up" doesn't just get engagement. It becomes a resource someone texts to their cardiologist.</p>
+        <p class="obs-opportunity">Carousel content built around mechanism-level explanations has outsized organic reach in this niche. That format may be underdeveloped relative to the knowledge you already have.</p>
+      </div>
+
+      <div class="obs-card">
+        <span class="obs-number">Observation 03</span>
+        <h3>Brand partnership territory is almost completely open.</h3>
+        <p>Electrolyte brands, compression garment companies, and heart rate monitor brands are the most natural fits in the POTS fitness space. Almost none of them are running visible creator partnerships with accounts that speak authentically to the dysautonomia community.</p>
+        <p class="obs-opportunity">A creator with genuine lived-experience credibility is worth significantly more to these brands than a generic wellness influencer. The positioning angle writes itself: the only fitness creator who uses these products because she actually has to.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ================================= -->
+<section>
+  <div class="container">
+    <span class="section-num">03 / 07</span>
+    <h2>What I can do with you.</h2>
+
+    <div class="services-grid">
+
+      <div class="service-card">
+        <h3>Instagram Bio Page</h3>
+        <ul>
+          <li>Standalone landing page matching your feed aesthetic</li>
+          <li>Captures leads from people not ready to follow</li>
+          <li>Built around your audience's language: POTS-friendly, recumbent, dysautonomia, pacing</li>
+          <li>Not a generic Linktree</li>
+        </ul>
+        <!-- STUDENT: dien gia vao day -->
+        <span class="price-badge">Investment: contact to discuss</span>
+      </div>
+
+      <div class="service-card">
+        <h3>Content Strategy</h3>
+        <ul>
+          <li>5 content pillars with specific angle banks</li>
+          <li>Posting rhythm built for your energy reality</li>
+          <li>Carousel template system for low-energy days</li>
+          <li>Brand partnership positioning document</li>
+          <li>Hook library written in your voice</li>
+        </ul>
+        <span class="price-badge">Investment: contact to discuss</span>
+      </div>
+
+      <div class="service-card">
+        <h3>Content Execution - Carousel + Post</h3>
+        <ul>
+          <li>Educational carousels: mechanism-level explanations</li>
+          <li>Community validation posts your audience saves and shares</li>
+          <li>Research-backed copy, plain language, no condescension</li>
+          <li>Every caption written from your voice, not a template</li>
+        </ul>
+        <span class="price-badge">Investment: contact to discuss</span>
+      </div>
+
+      <div class="service-card">
+        <h3>Content Execution - Reels + Stories</h3>
+        <ul>
+          <li>Reels scripts: mechanism explainers, workout demos, myth-busting</li>
+          <li>Story frames: educational sequences, Q&A setups, polls</li>
+          <li>Scripts that account for your energy - no 8-take formats</li>
+          <li>Aesthetic story frames that extend your feed look</li>
+        </ul>
+        <span class="price-badge">Investment: contact to discuss</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== SAMPLES ================================== -->
+<section>
+  <div class="container">
+    <span class="section-num">04 / 07</span>
+    <h2>Sample content, written in your voice.</h2>
+    <p style="margin-bottom:36px; color:var(--muted); font-size:15.5px;">Two pieces written after reading this account's niche deeply - not adapted from another account, not built from a template. Here is what a week of content from me looks like for you.</p>
+
+    <!-- SAMPLE 1 -->
+    <div class="sample-block">
+      <span class="sample-type">Sample 01 - Reel Caption</span>
+      <p class="sample-title">Angle: the fitness industry wasn't built for your body - and that's the industry's failure, not yours</p>
+
+      <div class="caption-body">okay so genuine question:
+
+why does every fitness video start with "stand with feet shoulder-width apart"
+
+like... that's the whole problem.
+
+my heart rate doesn't care that you labeled it "low intensity."
+the moment i'm upright for more than a few minutes, it's already doing what it wants.
+
+for years i thought that was just me failing at exercise.
+
+it wasn't.
+
+it was exercise failing people with POTS.
+
+the CHOP protocol doesn't start with standing.
+the Levine protocol doesn't start with standing.
+the actual research doesn't start with standing.
+
+the fitness industry just never got the memo.
+
+so here's what my workouts actually look like:
+on the floor. recumbent. sometimes rowing. sometimes strength work lying down.
+
+not because i'm lazy.
+because that's how you build cardiovascular tolerance with a dysautonomia diagnosis without crashing for three days after.
+
+if you've been avoiding exercise because every video sends you into a flare -
+
+it's not you.
+the content was built for a different body.
+
+💙 save this for the next time someone tells you to "just push through it"</div>
+    </div>
+
+    <!-- SAMPLE 2 -->
+    <div class="sample-block">
+      <span class="sample-type">Sample 02 - Educational Carousel (7 slides)</span>
+      <p class="sample-title">Angle: why standing up is hard with POTS - the mechanism explained simply</p>
+
+      <div class="carousel-slides">
+        <div class="slide">
+          <span class="slide-label">Slide 01 - Hook</span>
+          <p class="slide-copy">why your heart rate spikes just from standing up
+
+(a very unsatisfying explanation from your own body)</p>
+        </div>
+        <div class="slide">
+          <span class="slide-label">Slide 02</span>
+          <p class="slide-copy">when most people stand up, the body automatically redirects blood flow upward
+
+to keep the brain and heart supplied.
+
+with POTS, that signal doesn't work the way it should.
+
+blood pools in the legs and lower body instead of moving up.</p>
+        </div>
+        <div class="slide">
+          <span class="slide-label">Slide 03</span>
+          <p class="slide-copy">your heart's response?
+
+beat faster.
+a lot faster.
+
+trying to compensate for the drop in blood returning to it.
+
+that's not anxiety.
+that's physics.</p>
+        </div>
+        <div class="slide">
+          <span class="slide-label">Slide 04</span>
+          <p class="slide-copy">this is why "just stand up slowly" helps a little but doesn't fix it.
+
+the problem isn't speed.
+
+it's that the whole autonomic signaling system isn't doing its job.</p>
+        </div>
+        <div class="slide">
+          <span class="slide-label">Slide 05</span>
+          <p class="slide-copy">and it's why recumbent and supine exercise actually helps.
+
+when you're horizontal, gravity isn't pulling blood away from where it needs to be.
+
+your heart gets to work with a full tank.</p>
+        </div>
+        <div class="slide">
+          <span class="slide-label">Slide 06</span>
+          <p class="slide-copy">over time, building that cardiovascular base lying down translates to better upright tolerance.
+
+not immediately.
+not overnight.
+
+but that's the direction.</p>
+        </div>
+        <div class="slide">
+          <span class="slide-label">Slide 07 - Close</span>
+          <p class="slide-copy">if this finally explained something you've been feeling for years but couldn't name -
+
+💙 save this for the next time someone tells you exercise is "just exercise"
+
+follow for POTS-friendly fitness content that starts where your body actually is</p>
+        </div>
+      </div>
+
+      <p class="sample-note">These samples were written after reading 10+ captions and posts in the POTS fitness creator space. The goal was to mirror your sentence rhythm, your community-first framing, and the way you use direct language without toxic positivity - not to impose a different voice on your brand. If we work together, every piece of content goes through this same process before it reaches you.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== WHY DIFFERENT ============================ -->
+<section>
+  <div class="container">
+    <span class="section-num">05 / 07</span>
+    <h2>Why this is different.</h2>
+    <ul class="diff-list">
+      <li>This proposal was built after reading your account, not before. These samples did not come from a wellness creator template. They came from research into your niche, your audience's language, and the specific gap you fill.</li>
+      <li>Voice-first, format second. Most SMM services lead with "how many posts per week." This approach starts with: what does this creator actually sound like, and how do we scale that without flattening it.</li>
+      <li>Chronic illness context is built in - not added as a disclaimer. The content system accounts for flare days, energy variability, and the reality that "batch 30 posts in a weekend" does not apply here.</li>
+      <li>No templates that make your account look like three other accounts. Every deliverable is built from your voice and your audience, from the first draft.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== PRICING ================================== -->
+<section>
+  <div class="container">
+    <span class="section-num">06 / 07</span>
+    <h2>Start here.</h2>
+    <p style="margin-bottom:36px; color:var(--muted); font-size:15.5px;">Before committing to a full strategy, try the work first.</p>
+
+    <div class="services-grid">
+
+      <div class="service-card" style="border:2px solid var(--hero); grid-column: 1 / -1;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px;">
+          <div>
+            <h3 style="font-size:18px; margin-bottom:10px;">3 Sample Content Pieces - Written in Your Voice</h3>
+            <ul style="font-size:14.5px; color:#3A4A58; line-height:1.8; list-style:none;">
+              <li style="padding-left:14px; position:relative; margin-bottom:6px;"><span style="position:absolute;left:0;color:var(--hero);">-</span>1 Reel caption</li>
+              <li style="padding-left:14px; position:relative; margin-bottom:6px;"><span style="position:absolute;left:0;color:var(--hero);">-</span>1 Educational carousel script (slide-by-slide)</li>
+              <li style="padding-left:14px; position:relative; margin-bottom:6px;"><span style="position:absolute;left:0;color:var(--hero);">-</span>1 Community validation post</li>
+              <li style="padding-left:14px; position:relative; margin-bottom:6px;"><span style="position:absolute;left:0;color:var(--hero);">-</span>Each piece written after reading your existing content - not templated</li>
+              <li style="padding-left:14px; position:relative;"><span style="position:absolute;left:0;color:var(--hero);">-</span>Delivered within 24 hours of confirmation</li>
+            </ul>
+          </div>
+          <div style="text-align:right; flex-shrink:0;">
+            <div style="font-family:'DM Serif Display',serif; font-size:48px; color:var(--highlight); line-height:1;">$70</div>
+            <div style="font-size:13px; color:var(--muted); margin-top:4px;">one-time</div>
+          </div>
+        </div>
+        <div style="margin-top:20px; padding-top:16px; border-top:1px solid var(--soft); font-size:13.5px; color:var(--muted); font-style:italic;">
+          The two samples above are free - a preview of the work. This package is the next step: a full set of three pieces ready to post, built around a growth strategy for your specific account.
+        </div>
+      </div>
+
+      <div class="service-card" style="grid-column: 1 / -1; background: var(--bg);">
+        <h3 style="font-size:15px; margin-bottom:10px;">Want more - content strategy, ongoing execution, or brand partnership positioning?</h3>
+        <p style="font-size:14.5px; color:#3A4A58; margin:0;">DM to discuss. Every arrangement is built around what you actually need, not a preset package.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ====================================== -->
+<section class="cta-section">
+  <div class="container">
+    <span class="section-num">07 / 07</span>
+    <h2>Ready to talk?</h2>
+    <p>Reply to the DM if any of this felt like it was written for you - because it was. No pressure, no pitch deck. Just a conversation about what you're building and how to get it in front of more people who need it.</p>
+    <!-- STUDENT: thay link DM Instagram vao day -->
+    <a class="cta-btn" href="https://www.instagram.com/evelyn.contentally?igsh=MWlpMXZyOGt5ZXZtYQ%3D%3D&utm_source=qr" target="_blank">Reply via Instagram DM</a>
+  </div>
+</section>
+
+<!-- ===== FOOTER =================================== -->
+<footer>
+  <div class="container" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; width:100%;">
+    <!-- STUDENT: thay ten cua em vao day -->
+    <span>Prepared by <strong>Evelyn</strong> - April 21, 2026</span>
+    <span>This proposal was written specifically for @fitness.with.pots.jess. Not a template.</span>
+  </div>
+</footer>
+
+</body>
+</html>
